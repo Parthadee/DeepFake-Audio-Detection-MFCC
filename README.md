@@ -165,4 +165,3 @@ Random Forest / KNN                                     1D CNN Model
 - **scikit-learn** — Random Forest, KNN, SMOTE
 - **NumPy / pandas** — data preprocessing
 
----
