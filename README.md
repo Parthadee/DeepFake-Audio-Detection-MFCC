@@ -1,41 +1,44 @@
-# 🔊 DeepFake Voice Detection  
-A robust machine learning system for identifying **AI-generated (deepfake) voices** using MFCC features, spectral audio statistics, and a combination of **Deep Learning (CNN)** and **Classical ML (Random Forest, KNN)** models.
+# 🔊 DeepFake Voice Detection
+
+An end-to-end machine learning pipeline built to tell **real human speech apart from AI-generated (deepfake) voices**. It combines MFCC-based audio features, spectral statistics, and a mix of **Deep Learning (CNN)** and **classical ML models (Random Forest, KNN)**.
 
 ---
 
-## ⭐ Key Features  
-- Detects **real vs fake** speech with **98%+ accuracy**  
-- Uses **MFCCs**, **Mel-spectrogram statistics**, and **spectral features**  
-- Implements **1D CNN**, **Random Forest**, and **KNN**  
-- Includes full evaluation metrics with placeholders for all plots  
-- Built to support future deployment for fraud and security applications  
+## ⭐ Highlights
+
+- Classifies **real vs. fake** speech with **98%+ accuracy**
+- Built on **MFCCs**, **Mel-spectrogram statistics**, and **spectral audio features**
+- Implements a **1D CNN**, **Random Forest**, and **KNN** classifier
+- Ships with complete evaluation metrics and plot placeholders
+- Designed as a foundation for future **fraud detection and security** use cases
 
 ---
 
-## 📂 Dataset  
-- Audio format: **16 kHz, mono WAV**  
-- Classes: **Real**, **Fake**  
-- Includes various **SNR levels** and **noise-reduction methods**  
-- Dataset contains **class imbalance**, handled using **SMOTE**  
+## 📂 Dataset
+
+- **Format:** 16 kHz, mono WAV files
+- **Labels:** Real / Fake
+- Covers multiple **SNR levels** and **noise-reduction techniques**
+- Class imbalance addressed via **SMOTE** oversampling
 
 ---
 
-## 🎧 Feature Extraction  
+## 🎧 Feature Engineering
 
 ### **MFCC Features (40-D)**
-- Extracted using Librosa  
-- Mean-pooled across time  
-- Used as input to the 1D CNN  
+- Extracted with Librosa
+- Averaged (mean-pooled) across the time axis
+- Fed into the 1D CNN
 
-### **Engineered Audio Features (318-D)**
-- MFCC means  
-- Mel-Spectrogram means  
-- Log-Spectrogram (STFT) means  
-- Used for Random Forest and KNN models  
+### **Engineered Features (318-D)**
+- Mean MFCC values
+- Mean Mel-Spectrogram values
+- Mean log-STFT (spectrogram) values
+- Used as input for the Random Forest and KNN models
 
 ---
 
-## 🏗️ System Architecture  
+## 🏗️ Architecture Overview
 
 ```
            ┌─────────────── Preprocessing ───────────────┐
@@ -57,112 +60,113 @@ Random Forest / KNN                                     1D CNN Model
 
 ---
 
-## 🧠 Models Implemented  
+## 🧠 Models
 
-# **1️⃣ 1D CNN (MFCC-Based)**  
+### **1️⃣ 1D CNN (MFCC-Based)**
 
-### ✔ Architecture  
-- Conv1D → Dropout  
-- MaxPooling  
-- Conv1D → Dropout  
-- Dense + Softmax  
-- Trained for 40 epochs  
+**Architecture**
+- Conv1D → Dropout
+- MaxPooling
+- Conv1D → Dropout
+- Dense → Softmax
+- Trained across 40 epochs
 
-### ✔ Features Used
+**Input features**
 ![CNN Features](/assets/mfcc-40.png)
 
-### ✔ Performance  
-- **Dev Accuracy:** ~86%  
-- **Eval Accuracy:** ~88%  
-- Strong on detecting **fake audio**  
-- Mild overfitting  
+**Results**
+- **Dev accuracy:** ~86%
+- **Eval accuracy:** ~88%
+- Performs especially well at catching **fake audio**
+- Shows mild signs of overfitting
 
 ---
 
 ## 📊 CNN Evaluation (Placeholders)
 
-### 🟦 Training Accuracy Curve  
+### 🟦 Accuracy Over Training
 ![CNN Accuracy Curve](/assets/accuracy.png)
 
-### 🟥 Training Loss Curve  
+### 🟥 Loss Over Training
 ![CNN Loss Curve](/assets/loss.png)
 
-### 🟩 Confusion Matrix (CNN)  
+### 🟩 Confusion Matrix — CNN
 ![CNN Confusion Matrix](/assets/confussionmatrix-cnn.png)
 
-### 🟪 ROC Curve (CNN)  
+### 🟪 ROC Curve — CNN
 ![CNN ROC Curve](/assets/roc.png)
 
-### 🟨 Precision–Recall Curve (CNN)  
-<img width="631" height="468" alt="presision and recall" src="https://github.com/user-attachments/assets/6528d17a-c123-4064-9352-2353b8329af9" />
+### 🟨 Precision–Recall Curve — CNN
+<img width="631" height="468" alt="precision and recall" src="https://github.com/user-attachments/assets/6528d17a-c123-4064-9352-2353b8329af9" />
 
 ---
-# ✔ Features Used For the 318 Dimention
-![RN & KNN Features](/assets/realvsfake.png)
 
-# **2️⃣ Random Forest Classifier**
+### Input features for the 318-dimensional models
+![RF & KNN Features](/assets/realvsfake.png)
 
-### ✔ Performance  
-- **Accuracy:** **98.82%**  
-- High precision & recall on both classes  
-- Extremely robust to noise & dataset variance  
+### **2️⃣ Random Forest Classifier**
 
+**Results**
+- **Accuracy:** **98.82%**
+- Strong precision and recall across both classes
+- Highly resilient to noise and variation in the dataset
 
-
-### 🟩 Confusion Matrix (RF)  
+**Confusion Matrix — RF**
 ![RF Confusion Matrix](/assets/confusion.png)
 
 ---
 
-# **3️⃣ K-Nearest Neighbours (KNN)**  
+### **3️⃣ K-Nearest Neighbours (KNN)**
 
-### ✔ Performance  
-- **Accuracy:** **98.29%**  
-- Very stable across different samples  
-- k = 7 chosen for optimal performance  
+**Results**
+- **Accuracy:** **98.29%**
+- Consistent performance across sample variations
+- Best results at **k = 7**
 
-### 🟩 Confusion Matrix (KNN)  
+**Confusion Matrix — KNN**
 ![KNN Confusion Matrix](/assets/download.png)
 
 ---
 
-## 📊 Overall Model Comparison  
+## 📊 Model Comparison
 
 | Model | Accuracy | Strengths | Weaknesses |
 |-------|----------|-----------|------------|
-| **Random Forest** | ⭐ **98.82%** | Best overall, robust to noise | Slow to train on huge datasets |
-| **KNN (k=7)** | 98.29% | Simple & competitive | Slow inference on large data |
-| **CNN (MFCCs)** | ~88% | Learns temporal patterns | Overfitting risk |
+| **Random Forest** | ⭐ **98.82%** | Top performer, handles noise well | Training slows down on very large datasets |
+| **KNN (k=7)** | 98.29% | Simple, yet highly competitive | Inference gets slow at scale |
+| **CNN (MFCCs)** | ~88% | Captures temporal patterns | Prone to overfitting |
 
 ---
 
-## 🚧 Limitations  
-- Dataset imbalance required oversampling  
-- CNN performance limited by MFCC-only representation  
-- Needs evaluation on unseen deepfake generators  
-- Real-world recordings with background noise not fully tested  
+## 🚧 Known Limitations
+
+- Class imbalance required oversampling to correct
+- CNN accuracy is capped by relying on MFCCs alone
+- Not yet tested against unseen/novel deepfake generation methods
+- Limited testing on noisy, real-world recordings
 
 ---
 
-## 🚀 Future Enhancements  
-- Use **2D CNNs** on spectrogram images  
-- Add transformer-based encoders (**wav2vec 2.0**, **HuBERT**, **Whisper**)  
-- Deploy as a **web or mobile app** for live detection  
-- Add adversarial robustness  
-- Add explainable AI for forensic usage  
+## 🚀 Roadmap
+
+- Move to **2D CNNs** trained on spectrogram images
+- Integrate transformer-based encoders (**wav2vec 2.0**, **HuBERT**, **Whisper**)
+- Package as a **web or mobile app** for real-time detection
+- Strengthen **adversarial robustness**
+- Add **explainable AI** support for forensic use cases
 
 ---
 
-## 🛠️ Tech Stack  
-- **Python**  
-- **Librosa** – audio processing  
-- **TensorFlow / Keras** – CNN model  
-- **scikit-learn** – RF, KNN, SMOTE  
-- **NumPy / pandas** – preprocessing  
+## 🛠️ Tech Stack
+
+- **Python**
+- **Librosa** — audio processing
+- **TensorFlow / Keras** — CNN model
+- **scikit-learn** — Random Forest, KNN, SMOTE
+- **NumPy / pandas** — data preprocessing
 
 ---
 
-## 🙌 Contributors  
-**Srujan Rana**  
+## 🙌 Contributors
 
----
+**Srujan Rana**
