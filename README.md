@@ -166,7 +166,3 @@ Random Forest / KNN                                     1D CNN Model
 - **NumPy / pandas** — data preprocessing
 
 ---
-
-## 🙌 Contributors
-
-**Srujan Rana**
