@@ -1,26 +1,29 @@
-# Deepfake Audio Detection Using MFCC Features and a VGG16 + LSTM Hybrid Model
+<!-- <details> <summary>Click to expand</summary> -->
 
-This repository implements the research paper:
+# Deepfake Audio Detection via MFCC Features and VGG16 + LSTM
+
+This project implements the research paper:  
 **"Deepfake Audio Detection via MFCC Features Using Machine Learning"**
 
 ---
 
-## 📌 Overview
+## 📌 Summary
 
-This project identifies AI-generated (deepfake) audio using both traditional machine learning models and a hybrid deep learning architecture. Key components include:
+We detect audio deepfakes using classical ML models and a hybrid deep learning model. The project covers:
 
-- 🧹 Data cleaning and preprocessing
-- 🎵 Extraction of MFCC and spectral features
-- ⚙️ Dimensionality reduction using PCA
-- 🧠 Classical ML models: SVM, Random Forest, MLP, Gradient Boosting
-- 🤖 Deep learning: a fused VGG16 + LSTM architecture
-- 🔍 Hyperparameter optimization via RandomizedSearchCV
+- 🧹 Data Cleaning & Preprocessing
+- 🎵 MFCC and Spectral Feature Extraction
+- ⚙️ Dimensionality Reduction via PCA
+- 🧠 ML Models: SVM, RF, MLP, Gradient Boosting
+- 🤖 Deep Learning: VGG16 + LSTM Fusion
+- 🔍 Hyperparameter tuning with RandomizedSearchCV
 
 ---
 
-## 📂 Dataset
+## 📂 Dataset Used
 
-**Fake-or-Real (FoR) Dataset**, containing four variants:
+**Fake-or-Real (FoR)**:  
+Includes 4 subsets:
 - `for-original`
 - `for-2sec`
 - `for-norm`
@@ -28,20 +31,20 @@ This project identifies AI-generated (deepfake) audio using both traditional mac
 
 ---
 
-## 📈 Key Findings
+## 📈 Results & Observations
 
-- Applying PCA cut down training time while preserving most of the accuracy.
-- The VGG16 + LSTM fusion model delivered the strongest, most reliable detection performance.
-- Models were evaluated using accuracy, confusion matrices, and ROC-AUC scores.
+- PCA helped reduce training time without losing much accuracy.
+- VGG16+LSTM gave best performance for robust detection.
+- Evaluation used accuracy, confusion matrix, ROC-AUC.
 
 ---
 
 ## 🔗 Notebook
 
-The complete implementation is available here:
+Full code in this notebook:
 `deepfake_audio_detection.ipynb`
 
-Also hosted on [Kaggle](https://www.kaggle.com/code/gixo95/deepfake-audio-detection-code)
+Also on [Kaggle](https://www.kaggle.com/code/gixo95/deepfake-audio-detection-code)
 
 ---
 
@@ -54,7 +57,7 @@ Also hosted on [Kaggle](https://www.kaggle.com/code/gixo95/deepfake-audio-detect
 
 ---
 
-## 📦 Getting Started
+## 📦 How to Run
 
 ```bash
 git clone https://github.com/<your-username>/deepfake-audio-detection.git
@@ -62,7 +65,7 @@ cd deepfake-audio-detection
 jupyter notebook deepfake_audio_detection.ipynb
 ```
 
-## 📊 Results (MLP Classifier — FoR Re-recorded Subset)
+## 📊 Results (MLP Classifier on FoR-Rerecorded Subset)
 
 ### Confusion Matrix
 ![Confusion Matrix](results/confusion_matrix.png)
